@@ -1,0 +1,17 @@
+/home/fabian/Documentos/CODERHOUSE/Java PF/FacturacionEntregaProyectoFinalMareco/src/main/java/com/facturacion/dto/ComprobanteResponseDTO.java
+/home/fabian/Documentos/CODERHOUSE/Java PF/FacturacionEntregaProyectoFinalMareco/src/main/java/com/facturacion/dto/ComprobanteRequestDTO.java
+/home/fabian/Documentos/CODERHOUSE/Java PF/FacturacionEntregaProyectoFinalMareco/src/main/java/com/facturacion/entity/Cliente.java
+/home/fabian/Documentos/CODERHOUSE/Java PF/FacturacionEntregaProyectoFinalMareco/src/main/java/com/facturacion/entity/LineaComprobante.java
+/home/fabian/Documentos/CODERHOUSE/Java PF/FacturacionEntregaProyectoFinalMareco/src/main/java/com/facturacion/controller/ComprobanteController.java
+/home/fabian/Documentos/CODERHOUSE/Java PF/FacturacionEntregaProyectoFinalMareco/src/main/java/com/facturacion/service/ClienteService.java
+/home/fabian/Documentos/CODERHOUSE/Java PF/FacturacionEntregaProyectoFinalMareco/src/main/java/com/facturacion/repository/ComprobanteRepository.java
+/home/fabian/Documentos/CODERHOUSE/Java PF/FacturacionEntregaProyectoFinalMareco/src/main/java/com/facturacion/FacturacionApplication.java
+/home/fabian/Documentos/CODERHOUSE/Java PF/FacturacionEntregaProyectoFinalMareco/src/main/java/com/facturacion/util/DateUtil.java
+/home/fabian/Documentos/CODERHOUSE/Java PF/FacturacionEntregaProyectoFinalMareco/src/main/java/com/facturacion/service/ProductoService.java
+/home/fabian/Documentos/CODERHOUSE/Java PF/FacturacionEntregaProyectoFinalMareco/src/main/java/com/facturacion/entity/Producto.java
+/home/fabian/Documentos/CODERHOUSE/Java PF/FacturacionEntregaProyectoFinalMareco/src/main/java/com/facturacion/repository/ClienteRepository.java
+/home/fabian/Documentos/CODERHOUSE/Java PF/FacturacionEntregaProyectoFinalMareco/src/main/java/com/facturacion/repository/ProductoRepository.java
+/home/fabian/Documentos/CODERHOUSE/Java PF/FacturacionEntregaProyectoFinalMareco/src/main/java/com/facturacion/controller/ClienteController.java
+/home/fabian/Documentos/CODERHOUSE/Java PF/FacturacionEntregaProyectoFinalMareco/src/main/java/com/facturacion/service/ComprobanteService.java
+/home/fabian/Documentos/CODERHOUSE/Java PF/FacturacionEntregaProyectoFinalMareco/src/main/java/com/facturacion/entity/Comprobante.java
+/home/fabian/Documentos/CODERHOUSE/Java PF/FacturacionEntregaProyectoFinalMareco/src/main/java/com/facturacion/controller/ProductoController.java
