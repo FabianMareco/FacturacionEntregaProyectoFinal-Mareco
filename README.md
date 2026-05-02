@@ -27,6 +27,7 @@ de venta con validaciones de stock y precio histórico.
 - 📦 Empaquetado como JAR ejecutable
 
 ## 📁 Estructura del proyecto
+```
 FacturacionEntregaProyectoFinalMareco/
 ├── pom.xml
 ├── README.md
@@ -45,6 +46,7 @@ FacturacionEntregaProyectoFinalMareco/
 │   │       └── data.sql
 │   └── test/
 └── target/
+```
 ## ⚙️ Requisitos
 
 - Java 21+
