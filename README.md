@@ -1,37 +1,32 @@
-📄 README – Proyecto Java: API REST de Facturación
-🧩 Alcance del proyecto
-Este proyecto corresponde a la parte de Java con Spring Boot del trabajo final. Desarrolla una API REST para administrar ventas de un comercio de clases y servicios. Incluye:
+# 🧾 MUEVETE – API REST de Facturación con Spring Boot
 
-Entidades JPA: Cliente, Producto, Comprobante, LineaComprobante.
+API REST desarrollada en Java con Spring Boot para administrar ventas
+de clases, packs y servicios de nutrición. Permite crear comprobantes
+de venta con validaciones de stock y precio histórico.
 
-Arquitectura de 3 capas: Controller, Service, Repository.
+## 🚀 Tecnologías
 
-Endpoints CRUD para clientes y productos.
+| Tecnología | Uso |
+|---|---|
+| Java 21 | Lenguaje principal |
+| Spring Boot 3 | Framework web y DI |
+| Spring Data JPA | Persistencia y repositorios |
+| H2 Database | Base de datos en memoria |
+| Maven | Build y empaquetado |
+| WorldClockAPI | Fecha/hora externa con fallback |
 
-Endpoint POST /api/comprobantes para crear una venta con validaciones:
+## ✨ Funcionalidades
 
-Cliente existente.
+- 📋 CRUD completo de clientes y productos
+- 🧾 Creación de comprobantes de venta con:
+  - Validación de cliente y productos existentes
+  - Validación y reducción automática de stock
+  - Precio histórico (no se ve afectado por cambios posteriores al producto)
+  - Fecha obtenida desde `worldclockapi.com` con fallback a `LocalDateTime.now()`
+- 💾 Base de datos H2 inicializada automáticamente con `data.sql`
+- 📦 Empaquetado como JAR ejecutable
 
-Productos existentes.
-
-Stock suficiente.
-
-Reducción automática del stock.
-
-Precio histórico en el comprobante (no se modifica si el producto cambia después).
-
-Obtención de la fecha desde http://worldclockapi.com con fallback a LocalDateTime.now().
-
-Respuestas con códigos de estado HTTP (200, 201, 404, 409).
-
-Base de datos H2 en memoria.
-
-Inicialización de datos con data.sql (clientes, productos, packs, cursos).
-
-Generación de JAR ejecutable con Maven.
-
-📁 Estructura de archivos del proyecto Java
-text
+## 📁 Estructura del proyecto
 FacturacionEntregaProyectoFinalMareco/
 ├── pom.xml
 ├── README.md
@@ -49,179 +44,113 @@ FacturacionEntregaProyectoFinalMareco/
 │   │       ├── application.properties
 │   │       └── data.sql
 │   └── test/
-└── target/ (se genera al compilar)
-⚙️ Requisitos previos
-Java 21 (o superior) instalado.
+└── target/
+## ⚙️ Requisitos
 
-Maven 3.6+ (opcional, si se usa el JAR ya compilado no es necesario).
+- Java 21+
+- Maven 3.6+ *(solo si se compila desde fuente)*
+- Postman u otro cliente REST para probar los endpoints
 
-Postman (o cualquier cliente REST) para probar los endpoints.
+## 🔧 Cómo ejecutar
 
-🚀 Instrucciones de ejecución
-Opción 1: Ejecutar el JAR directamente (recomendado para entrega)
-bash
+### Opción 1 — JAR precompilado
+
+```bash
 java -jar FacturacionEntregaProyectoFinalMareco-1.0.0.jar
-La aplicación se levantará en http://localhost:8080.
+```
 
-Opción 2: Compilar y ejecutar con Maven
-bash
+### Opción 2 — Compilar con Maven
+
+```bash
 mvn clean install
 mvn spring-boot:run
-🧪 Endpoints para probar con Postman
-Clientes
-Método	Endpoint	Ejemplo de body
-GET	/api/clientes	–
-GET	/api/clientes/1	–
-POST	/api/clientes	{"nombre":"Juan","email":"juan@mail.com"}
-PUT	/api/clientes/1	{"nombre":"JuanP","email":"juan@mail.com"}
-Productos
-Método	Endpoint	Ejemplo
-GET	/api/productos	–
-GET	/api/productos/1	–
-POST	/api/productos	{"nombre":"Clase","precio":9999,"stock":10}
-PUT	/api/productos/1	{"nombre":"Clase Jazz","precio":10500,"stock":8}
-Crear comprobante de venta (el más importante)
-URL: POST http://localhost:8080/api/comprobantes
+```
 
-Body (JSON):
+La app queda disponible en `http://localhost:8080`.
 
-json
+## 🧪 Endpoints
+
+### Clientes
+
+| Método | Endpoint | Body |
+|---|---|---|
+| GET | `/api/clientes` | – |
+| GET | `/api/clientes/{id}` | – |
+| POST | `/api/clientes` | `{"nombre":"Juan","email":"juan@mail.com"}` |
+| PUT | `/api/clientes/{id}` | `{"nombre":"JuanP","email":"juan@mail.com"}` |
+
+### Productos
+
+| Método | Endpoint | Body |
+|---|---|---|
+| GET | `/api/productos` | – |
+| GET | `/api/productos/{id}` | – |
+| POST | `/api/productos` | `{"nombre":"Clase","precio":9999,"stock":10}` |
+| PUT | `/api/productos/{id}` | `{"nombre":"Clase Jazz","precio":10500,"stock":8}` |
+
+### Crear comprobante de venta
+
+**`POST /api/comprobantes`**
+
+```json
 {
-"cliente": { "clienteId": 1 },
-"lineas": [
-{ "cantidad": 2, "producto": { "productoId": 1 } },
-{ "cantidad": 1, "producto": { "productoId": 3 } }
-]
+  "cliente": { "clienteId": 1 },
+  "lineas": [
+    { "cantidad": 2, "producto": { "productoId": 1 } },
+    { "cantidad": 1, "producto": { "productoId": 3 } }
+  ]
 }
-Respuesta exitosa (201 Created):
+```
 
-json
+**Respuesta exitosa `201 Created`:**
+
+```json
 {
-"comprobanteId": 1,
-"fecha": "2026-03-30T04:13:47",
-"clienteNombre": "Fabian Mareco",
-"lineas": [...],
-"total": 59998.0,
-"cantidadTotalProductos": 3
+  "comprobanteId": 1,
+  "fecha": "2026-03-30T04:13:47",
+  "clienteNombre": "Fabian Mareco",
+  "lineas": [...],
+  "total": 59998.0,
+  "cantidadTotalProductos": 3
 }
-Errores posibles (409 Conflict):
+```
 
-"Cliente no existe"
+**Errores posibles `409 Conflict`:**
+- `"Cliente no existe"`
+- `"Producto con ID X no existe"`
+- `"Stock insuficiente para ..."`
 
-"Producto con ID X no existe"
+## 📦 Generar el JAR
 
-"Stock insuficiente para ..."
-
-📦 Generación del JAR final
-bash
+```bash
 mvn clean package
-El JAR se generará en target/FacturacionEntregaProyectoFinalMareco-1.0.0.jar.
-Si la consigna pide un nombre exacto sin versión, renombrarlo:
+```
 
-bash
-mv target/FacturacionEntregaProyectoFinalMareco-1.0.0.jar target/FacturacionEntregaProyectoFinalMareco.jar
-🗃️ Datos precargados (data.sql)
-Al iniciar la aplicación, se crean automáticamente:
+El JAR se genera en `target/FacturacionEntregaProyectoFinalMareco-1.0.0.jar`.
 
-5 clientes (con nombres y emails).
+Para renombrarlo si es necesario:
 
-14 clases de movimiento a $9.999 c/u (Danza Jazz, Clásica, Contemporánea, Yoga, Tango, Urbanos, Flexibilidad, Expresión Corporal, Folclóricas, Pilates, Flamenco, Movilidad Articular, Danza para Niños, Improvisación).
+```bash
+mv target/FacturacionEntregaProyectoFinalMareco-1.0.0.jar \
+   target/FacturacionEntregaProyectoFinalMareco.jar
+```
 
-Packs de clases: 4 clases (
-30.000
-)
-,
-8
-c
-l
-a
-s
-e
-s
-(
-30.000),8clases(50.000), Pase Mensual (
-70.000
-)
-,
-P
-a
-s
-e
-A
-n
-u
-a
-l
-(
-70.000),PaseAnual(650.000).
+## 🗃️ Datos precargados
 
-Productos de nutrición: 3 cursos sueltos (
-20.000
-c
-/
-u
-)
-,
-P
-a
-c
-k
-3
-c
-u
-r
-s
-o
-s
-(
-20.000c/u),Pack3cursos(50.000), Asesoría personalizada (
-40.000
-)
-,
-P
-a
-c
-k
-C
-u
-r
-s
-o
-s
-+
-A
-s
-e
-s
-o
-r
-ı
-ˊ
-a
-(
-40.000),PackCursos+Asesor
-ı
-ˊ
-a(75.000).
+Al iniciar la aplicación se cargan automáticamente via `data.sql`:
 
-✅ Cumplimiento de consignas del proyecto final Java
-Entidades, repositorios JPA, servicios y controladores.
+**5 clientes** con nombre y email.
 
-Validaciones al crear comprobante (cliente, productos, stock).
+**14 clases de movimiento** a $9.999 c/u: Danza Jazz, Clásica, Contemporánea,
+Yoga, Tango, Urbanos, Flexibilidad, Expresión Corporal, Folclóricas, Pilates,
+Flamenco, Movilidad Articular, Danza para Niños, Improvisación.
 
-Reducción de stock.
+**Packs de clases:** 4 clases ($30.000), 8 clases ($50.000),
+Pase Mensual ($70.000), Pase Anual ($650.000).
 
-Precio histórico en comprobante.
+**Nutrición:** 3 cursos sueltos ($20.000 c/u), Pack 3 cursos ($50.000),
+Asesoría personalizada ($40.000), Pack Cursos + Asesoría ($75.000).
 
-Consumo de servicio externo para fecha con fallback.
+## 🧑‍💻 Autor
 
-Respuestas con códigos HTTP adecuados.
-
-Script de inicialización de datos.
-
-Proyecto empaquetado como JAR ejecutable.
-
-Documentación con README.
-
-🧑‍💻 Autor
-Fabian Mareco – Proyecto final para diplomatura Full Stack.
+Fabian Mareco
